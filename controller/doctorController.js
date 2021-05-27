@@ -62,6 +62,7 @@ const logout_get = (req, res) => {
   res.status(201).json({ doctor: 'logout' });
 };
 
+// admin part
 const create_post = async (req, res) => {
   try {
     const doctor = await Doctor.create(req.body);
@@ -73,9 +74,13 @@ const create_post = async (req, res) => {
 };
 
 const destroy_delete = async (req, res) => {
+  const { email, password } = req.body;
   try {
-    const message = await Doctor.deleteOne({ id: req.body.id });
-    res.status(201).json(message);
+    const doctor = await Doctor.login(email, password);
+    if (doctor) {
+      await Doctor.deleteOne({ _id: doctor._id });
+      res.status(201).json({ doctor: doctor._id });
+    }
   } catch (error) {
     const errors = handleError(error);
     res.status(200).json({ errors });
