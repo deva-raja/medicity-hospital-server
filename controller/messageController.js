@@ -18,7 +18,7 @@ const show_get = async (req, res) => {
     res.status(201).json({ message });
   } catch (error) {
     const errors = handleError(error);
-    res.status(400).json({ errors });
+    res.status(200).json({ errors });
   }
 };
 
@@ -38,7 +38,7 @@ const destroy_delete = async (req, res) => {
     res.status(201).json(message);
   } catch (error) {
     const errors = handleError(error);
-    res.status(400).json({ errors });
+    res.status(200).json({ errors });
   }
 };
 
