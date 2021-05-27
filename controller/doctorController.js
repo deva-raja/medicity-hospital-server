@@ -33,28 +33,10 @@ const createToken = (id) => {
   });
 };
 
-const signup_get = (req, res) => {
-  return res.status(201).json({ doctor: 'signup' });
-};
-
-const login_get = (req, res) => {
-  return res.status(201).json({ doctor: 'login' });
-};
-
 const show_get = async (req, res) => {
   try {
     const doctor = await Doctor.find();
     res.status(201).json({ doctor });
-  } catch (error) {
-    const errors = handleError(error);
-    res.status(200).json({ errors });
-  }
-};
-
-const create_post = async (req, res) => {
-  try {
-    const doctor = await Doctor.create(req.body);
-    res.status(201).json({ doctor: doctor._id });
   } catch (error) {
     const errors = handleError(error);
     res.status(200).json({ errors });
@@ -76,24 +58,14 @@ const login_post = async (req, res) => {
 };
 
 const logout_get = (req, res) => {
-  res.cookie('jwt', '', { maxAge: 1 });
-  res.redirect('/');
+  res.cookie('doctor', '', { maxAge: 1 });
+  res.status(201).json({ doctor: 'logout' });
 };
-
-module.exports = {
-  signup_get,
-  signup_post,
-  login_get,
-  login_post,
-  logout_get,
-};
-
-const Doctor = require('../models/Doctor');
 
 const create_post = async (req, res) => {
   try {
-    const message = await Doctor.create(req.body);
-    res.status(201).json({ message });
+    const doctor = await Doctor.create(req.body);
+    res.status(201).json({ doctor: doctor._id });
   } catch (error) {
     const errors = handleError(error);
     res.status(200).json({ errors });
@@ -111,8 +83,8 @@ const destroy_delete = async (req, res) => {
 };
 
 module.exports = {
-  login_get,
-  create_get,
+  login_post,
+  create_post,
   show_get,
   destroy_delete,
   logout_get,

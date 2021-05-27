@@ -2,23 +2,23 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 const authMiddleWare = (req, res, next) => {
-  const token = req.cookies.jwt;
+  const token = req.cookies.doctor;
   if (token) {
-    jwt.verify(token, 'vinu devaraj', (err, decodedToken) => {
+    jwt.verify(token, 'medicity', (err, decodedToken) => {
       if (err) {
-        res.redirect('/login');
+        res.json({ doctor: 'login' });
       }
       next();
     });
   } else {
-    res.redirect('/login');
+    res.json({ doctor: 'login' });
   }
 };
 
 const checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
-    jwt.verify(token, 'vinu devaraj', async (err, decodedToken) => {
+    jwt.verify(token, 'medicity', async (err, decodedToken) => {
       if (err) {
         console.log(err.message);
         res.locals.user = null;
