@@ -28,7 +28,7 @@ const handleError = (error) => {
 
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
-  return jwt.sign({ id }, 'medicity', {
+  return jwt.sign({ id }, process.env.jwtKey, {
     expiresIn: maxAge,
   });
 };
@@ -46,7 +46,6 @@ const login_post = async (req, res) => {
     res.status(200).json({ errors });
   }
 };
-
 
 module.exports = {
   login_post,

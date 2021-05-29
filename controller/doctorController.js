@@ -28,7 +28,7 @@ const handleError = (error) => {
 
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
-  return jwt.sign({ id }, 'medicity', {
+  return jwt.sign({ id }, process.env.jwtKey, {
     expiresIn: maxAge,
   });
 };
@@ -54,11 +54,6 @@ const login_post = async (req, res) => {
     const errors = handleError(error);
     res.status(200).json({ errors });
   }
-};
-
-const logout_get = (req, res) => {
-  res.cookie('doctor', '', { maxAge: 1 });
-  res.status(201).json({ doctor: 'logout' });
 };
 
 // admin part
@@ -91,5 +86,4 @@ module.exports = {
   create_post,
   show_get,
   destroy_delete,
-  logout_get,
 };
