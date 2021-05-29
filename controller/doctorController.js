@@ -33,10 +33,18 @@ const createToken = (id) => {
   });
 };
 
-const show_get = async (req, res) => {
+const show_post = async (req, res) => {
+  const { speciality, name } = req.body;
   try {
-    const doctor = await Doctor.find();
-    res.status(201).json({ doctor });
+    if (speciality === '') {
+      const doctor = await Doctor.find();
+      return res.status(201).json({ doctor });
+    } else {
+      let queryName = `.*${name}.*`;
+      let regex = new RegExp(queryName, 'i');
+      const doctor = await Doctor.find({ name: regex, speciality: speciality });
+      return res.status(201).json({ doctor });
+    }
   } catch (error) {
     const errors = handleError(error);
     res.status(200).json({ errors });
@@ -84,6 +92,6 @@ const destroy_delete = async (req, res) => {
 module.exports = {
   login_post,
   create_post,
-  show_get,
+  show_post,
   destroy_delete,
 };
