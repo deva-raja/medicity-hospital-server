@@ -1,11 +1,11 @@
-const AuthRouter = require('./route/authRouter');
 const messageRouter = require('./route/messageRouter');
+const adminRouter = require('./route/adminRouter');
 const doctorRouter = require('./route/doctorRouter');
 const express = require('express');
 var cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-const { authMiddleWare, checkUser } = require('./middleware/AuthmiddleWare');
+const { authMiddleWare } = require('./middleware/AuthmiddleWare');
 const { urlencoded } = require('express');
 path = require('path');
 
@@ -40,8 +40,10 @@ app.get('/', (req, res) => {
   res.sendFile('./views/index.html', { root: __dirname });
 });
 
+app.use('/auth',authMiddleWare);
 app.use('/message', messageRouter);
 app.use('/doctor',doctorRouter);
+app.use('/admin',adminRouter);
 // app.get('*', checkUser);
 // app.get('/', (req, res) => res.render('home'));
 // app.get('/smoothies', authMiddleWare, (req, res) => res.render('smoothies'));

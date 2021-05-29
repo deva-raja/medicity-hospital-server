@@ -1,42 +1,27 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
 
 const authMiddleWare = (req, res, next) => {
-  const token = req.cookies.doctor;
-  if (token) {
-    jwt.verify(token, 'medicity', (err, decodedToken) => {
+  const admin = req.body.admin;
+  const doctor = req.body.doctor;
+  if (admin) {
+    jwt.verify(admin, 'medicity', (err, decodedToken) => {
       if (err) {
-        res.json({ doctor: 'login' });
+        return res.json({ page: 'login' });
       }
-      next();
+       return res.json({ page: 'admin' });
+    });
+  } else if (doctor) {
+    jwt.verify(doctor, 'medicity', (err, decodedToken) => {
+      if (err) {
+        return res.json({ page: 'login' });
+      }
+      return res.json({ page: 'doctor' });
     });
   } else {
-    res.json({ doctor: 'login' });
-  }
-};
-
-const checkUser = (req, res, next) => {
-  const token = req.cookies.jwt;
-  if (token) {
-    jwt.verify(token, 'medicity', async (err, decodedToken) => {
-      if (err) {
-        console.log(err.message);
-        res.locals.user = null;
-        next();
-      } else {
-        console.log(decodedToken);
-        let user = await User.findById(decodedToken.id);
-        res.locals.user = user;
-        next();
-      }
-    });
-  } else {
-    res.locals.user = null;
-    next();
+    res.json({ page: 'login' });
   }
 };
 
 module.exports = {
   authMiddleWare,
-  checkUser,
 };

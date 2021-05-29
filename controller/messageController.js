@@ -14,7 +14,7 @@ const handleError = (error) => {
 
 const show_get = async (req, res) => {
   try {
-    const message = await Message.find();
+    const message = await Message.find().sort({ createdAt: -1 });
     res.status(201).json({ message });
   } catch (error) {
     const errors = handleError(error);

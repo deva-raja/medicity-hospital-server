@@ -49,8 +49,7 @@ const login_post = async (req, res) => {
     const doctor = await Doctor.login(email, password);
 
     const token = createToken(doctor._id);
-    res.cookie('doctor', token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(201).json({ doctor: doctor._id });
+    res.status(201).json({ doctor: doctor._id, token });
   } catch (error) {
     const errors = handleError(error);
     res.status(200).json({ errors });
