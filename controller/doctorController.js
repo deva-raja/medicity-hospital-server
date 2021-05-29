@@ -36,7 +36,12 @@ const createToken = (id) => {
 const show_post = async (req, res) => {
   const { speciality, name } = req.body;
   try {
-    if (speciality === '') {
+    if (speciality === '' && name !== '') {
+      let queryName = `.*${name}.*`;
+      let regex = new RegExp(queryName, 'i');
+      const doctor = await Doctor.find({ name: regex });
+      return res.status(201).json({ doctor });
+    } else if (speciality === '' && name === '') {
       const doctor = await Doctor.find();
       return res.status(201).json({ doctor });
     } else {
