@@ -1,6 +1,7 @@
 const messageRouter = require('./route/messageRouter');
 const adminRouter = require('./route/adminRouter');
 const doctorRouter = require('./route/doctorRouter');
+const appointmentRouter = require('./route/appointmentRouter');
 const express = require('express');
 var cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -34,16 +35,16 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-
 // routes
 app.get('/', (req, res) => {
   res.sendFile('./views/index.html', { root: __dirname });
 });
 
-app.use('/auth',authMiddleWare);
+app.use('/auth', authMiddleWare);
 app.use('/message', messageRouter);
-app.use('/doctor',doctorRouter);
-app.use('/admin',adminRouter);
+app.use('/doctor', doctorRouter);
+app.use('/admin', adminRouter);
+app.use('/appointment', appointmentRouter);
 // app.get('*', checkUser);
 // app.get('/', (req, res) => res.render('home'));
 // app.get('/smoothies', authMiddleWare, (req, res) => res.render('smoothies'));
