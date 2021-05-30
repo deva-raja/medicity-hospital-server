@@ -30,9 +30,10 @@ const create_post = async (req, res) => {
 };
 
 const destroy_delete = async (req, res) => {
+  console.log({'appointment': req.body.id });
   try {
-    const appointment = await Appointment.deleteOne({ id: req.body.id });
-    res.status(201).json(appointment);
+    const appointment = await Appointment.deleteOne({ _id: req.body.id });
+    res.status(201).json({ appointment });
   } catch (error) {
     const errors = handleError(error);
     res.status(200).json({ errors });

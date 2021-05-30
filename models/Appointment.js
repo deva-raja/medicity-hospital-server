@@ -7,7 +7,7 @@ const AppointmentSchema = mongoose.Schema(
       required: [true, 'Name is required'],
     },
     age: {
-      type: Number,
+      type: String,
       required: [true, 'Age is required'],
       maxlength: [2, 'Too old'],
     },
