@@ -34,7 +34,7 @@ const create_post = async (req, res) => {
 
 const destroy_delete = async (req, res) => {
   try {
-    const message = await Message.deleteOne({ id: req.body.id });
+    const message = await Message.deleteOne({ _id: req.body.id });
     res.status(201).json(message);
   } catch (error) {
     const errors = handleError(error);
