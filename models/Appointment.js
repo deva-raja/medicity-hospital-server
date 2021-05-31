@@ -9,13 +9,20 @@ const AppointmentSchema = mongoose.Schema(
     age: {
       type: String,
       required: [true, 'Age is required'],
-      maxlength: [2, 'Too old'],
     },
     sex: {
       type: String,
       required: [true, 'Sex is required'],
     },
-    phoneNumber: {
+    date: {
+      type: String,
+      required: [true, 'Date is required'],
+    },
+    time: {
+      type: String,
+      required: [true, 'Time is required'],
+    },
+    conditions: {
       type: String,
     },
     doctor_id: {
