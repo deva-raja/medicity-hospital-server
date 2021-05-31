@@ -45,7 +45,3 @@ app.use('/message', messageRouter);
 app.use('/doctor', doctorRouter);
 app.use('/admin', adminRouter);
 app.use('/appointment', appointmentRouter);
-// app.get('*', checkUser);
-// app.get('/', (req, res) => res.render('home'));
-// app.get('/smoothies', authMiddleWare, (req, res) => res.render('smoothies'));
-// app.use(AuthRouter);
