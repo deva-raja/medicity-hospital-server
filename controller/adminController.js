@@ -39,7 +39,7 @@ const login_post = async (req, res) => {
   try {
     const admin = await Admin.login(email, password);
 
-    const token = createToken(admin._id);
+    const token = await createToken(admin._id);
     res.status(201).json({ admin: admin._id, token });
   } catch (error) {
     const errors = handleError(error);

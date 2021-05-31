@@ -12,8 +12,8 @@ path = require('path');
 
 require('dotenv').config();
 const PORT = process.env.PORT || 5000;
-
 const app = express();
+
 
 // middlewares
 app.use(cors());
