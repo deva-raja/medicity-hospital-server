@@ -14,7 +14,7 @@ To view the frontendcode - [client](https://github.com/deva-raja/medicity-hospit
 
 * authentication - [jwt](https://jwt.io/)
 
-* encrypting password - [bcrypt](https://www.npmjs.com/package/bcryptj)
+* encrypting password - [bcrypt](https://www.npmjs.com/package/bcrypt)
 
 * cross refernce origin  - [cors](https://www.npmjs.com/package/cors)
 
