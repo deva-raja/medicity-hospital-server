@@ -35,7 +35,6 @@ const createToken = (id) => {
 
 const login_post = async (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body);
   try {
     const admin = await Admin.login(email, password);
 
